@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+   #head{
+    color: aqua;
+    border-radius: 10px;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+   }
+    #guessnumber{
+        position: relative;
+        margin-top: 10px;
+    }
+    #main{
+  width: 400px;
+  height: 400px;
+  background: linear-gradient(to bottom, purple, pink, cyan, black);
+  border-radius: 20px;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  font-family: sans-serif;
+}
+#check1{
+    color: black;
+    background-color: lightblue;
+    border-radius: 10px;
+    border: solid blueviolet;
+}
+    
+    </style>
+</head>
+<body>
+<div id="main"> 
+    <h1 id="head">Guess The Number From 1 t0 10</h1>
+    <input type="text" id="guessnumber" placeholder="Enter The Number">
+    <button onclick="check()" id="check1">Check</button>
+    <p id="result" onclick="check()"></p>
+    <p id="score" onclick="check()">Score:10</p>
+    <button  id="Goback" onclick="back">Go Back</button>
+</div>
+   <script>
+    //selecting input box,paraGraph
+    var guessnumber=document.getElementById("guessnumber")
+    var Result=document.getElementById("result")
+    var score=document.getElementById("score")
+    var randomNumber=Math.floor(Math.random()*10)+1
+    console.log(randomNumber)
+    var totalscore=10
+    const correctAudio=new Audio("CorrectAudioo.mp3")
+    const wrongAudio= new Audio("wrongAudio.mp3")
+    guessnumber.style.color="skyblue";
+    
+    function check(){
+        var enteredNumber=guessnumber.value 
+        if(enteredNumber==randomNumber){
+            totalscore=totalscore+1
+            score.textContent="score:"+totalscore
+            console.log("Right")
+            result.textContent="Right"
+            result.style.color="Green"
+            result.style.fontFamily = "Comic Sans MS, cursive, sans-serif";
+            check1.style.backgroundColor="Green"
+            correctAudio.play();
+        }
+        else{
+             totalscore=totalscore-1
+             score.textContent="score:"+totalscore
+             result.textContent="Wrong"
+             check1.style.backgroundColor="red"
+             result.style.color="red"
+             result.style.fontFamily = "Comic Sans MS, cursive, sans-serif";
+             wrongAudio.play();
+            }
+        }
+            document.getElementById("Goback").onclick=function(){
+window.location.href="index.html"
+            }
+           
+
+    
+   </script>
+   
+</body>
+</html>

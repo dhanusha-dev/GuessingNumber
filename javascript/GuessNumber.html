@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    #head{position:relative;border: solid purple 20px;background-color: aquamarine;"
+    }
+    #guessnumber{
+        position: relative;
+        margin-top: 10px;
+
+    }
+    #main{
+         margin: 100px;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        justify-content: center;
+        border:solid blueviolet 30px;
+        background-color:hotpink;
+    }
+    </style>
+</head>
+<body>
+<div id="main"> 
+    <h1 id="head">Guess The Number Challenge From 1 t0 10</h1>
+    <input type="text" id="guessnumber" placeholder="Enter The Number">
+    <button onclick="check()">Check</button>
+    <p id="result" onclick="check()"></p>
+    <p id="score" onclick="check()">Score:10</p>
+<div> 
+   
+</div>
+</div>
+   <script>
+    //selecting input box,paraGraph
+    var guessnumber=document.getElementById("guessnumber")
+    var Result=document.getElementById("result")
+    var score=document.getElementById("score")
+    var randomNumber=Math.floor(Math.random()*10)+1
+    console.log(randomNumber)
+    var totalscore=10
+    function check(){
+        var enteredNumber=guessnumber.value 
+        if(enteredNumber==randomNumber){
+            totalscore=totalscore+1
+             score.textContent="score:"+totalscore
+           console.log("Right")
+           result.textContent="Right"
+           alert("You Won Won!!!")
+        }
+        else{
+            totalscore=totalscore-1
+            score.textContent="score:"+totalscore
+            result.textContent="Wrong"
+            // alert("OOPs...You are Wrong.😓")
+        }
+    }
+   </script>
+   
+</body>
+</html>

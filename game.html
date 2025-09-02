@@ -5,11 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-   #head{
+   /* #head{
     color: aqua;
     border-radius: 10px;
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-   }
+    font-size: ;
+   } */
+    #head {
+  font-size: 100px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  border-radius: 10px;
+  text-align: center;
+
+  /* Gradient magic */
+  background: linear-gradient(to right, rgb(105, 81, 215), rgb(78, 12, 45), rgb(85, 35, 36), rgb(131, 202, 90));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+      -webkit-text-stroke:5px lightblue ;
+}
     #guessnumber{
         position: relative;
         margin-top: 10px;
@@ -58,6 +73,7 @@ html, body {
     </style>
 </head>
 <body>
+  <audio src="./gameAudio.mp3" loop autoplay></audio>
 <div id="main"> 
     <h1 id="head">Guess The Number From 1 t0 10</h1>
     <input type="number" id="guessnumber" placeholder="        Enter The Number" min="1" max="10" style="width: 170px;height:50px;  background-color: bisque; border: solid pink;border-radius: 10px;"><br><br>
@@ -68,7 +84,16 @@ html, body {
 </div>
 
    <script>
-
+// Inside your <script> in game.html
+window.addEventListener("DOMContentLoaded", () => {
+  const shouldPlay = localStorage.getItem("playMusic");
+  if (shouldPlay === "true") {
+    const bgMusic = document.getElementById("bgMusic");
+    bgMusic.loop = true;
+    bgMusic.play();
+    localStorage.removeItem("playMusic"); // optional: clear flag after use
+  }
+});
     function launchFullScreen() {
     const elem = document.documentElement;
     if (elem.requestFullscreen) {

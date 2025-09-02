@@ -6,49 +6,67 @@
     <title>Document</title>
 </head>
 <style>
-      #front{width: 400px;
-  height: 400px;
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+#front {
+  width: 100vw;
+  height: 100vh;
   background: linear-gradient(to bottom, purple, pink, cyan, black);
   border-radius: 20px;
-  padding: 20px;
+  padding: 5vh;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   color: white;
-  font-family:Georgia, 'Times New Roman', Times, serif;
-  font-size: 40px;
-}
-html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    overflow: hidden;
-}
-#front {
-    width: 100vw;
-    height: 100vh;
-}
-#button{
-    height: 100px;
-    width: 100px;
-    border-radius: 50px;
-    font-family:cursive;
-    background-color:mediumturquoise;
-    font-size: large;
-}
-#first{
-    font-size: 150px;
-    font-family: cursive;
-    background: linear-gradient(to left,rgb(17, 169, 245),rgb(179, 127, 242),rgb(46, 226, 208),rgb(152, 92, 152));
-    -webkit-background-clip: text;
-    -webkit-backdrop-filter: transparent;
-    color: transparent;
-    -webkit-text-stroke:2px blue ;
-    
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 2rem;
 }
 
+#button {
+  height: 80px;
+  width: 80px;
+  border-radius: 50%;
+  font-family: cursive;
+  background-color: mediumturquoise;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+}
+
+#first {
+  font-size: 3rem;
+  text-align: center;
+  font-family: cursive;
+  background: linear-gradient(to left, rgb(17, 169, 245), rgb(179, 127, 242), rgb(46, 226, 208), rgb(152, 92, 152));
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-stroke: 1px blue;
+}
+
+/* 📱 Mobile optimization */
+@media (max-width: 600px) {
+  #first {
+    font-size: 2rem;
+    -webkit-text-stroke: 0.5px blue;
+  }
+
+  #button {
+    width: 60px;
+    height: 60px;
+    font-size: 0.8rem;
+  }
+
+  #front {
+    padding: 3vh;
+  }
+}
 </style>
 <body id="front">
        <h1 id="first">Start the Game</h1>
@@ -73,7 +91,7 @@ var Button=document.getElementById("button")
 function start(){
     window.location.href="game.html"
       localStorage.setItem("playMusic", "true");
-  window.location.href = "game.html";
+
 }
 </script>
 </body>

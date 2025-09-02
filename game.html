@@ -17,10 +17,7 @@
     #main{
   width: 400px;
   height: 400px;
-  background: linear-gradient(to bottom, purple, pink, cyan, black);
-  border-radius: 20px;
   padding: 20px;
-  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -44,6 +41,13 @@ input[type=number]::-webkit-outer-spin-button {
 /* Hide number input spinners in Firefox */
 input[type=number] {
   -moz-appearance: textfield;
+}
+        html, body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
 }
     
     </style>
@@ -112,9 +116,7 @@ guessnumber.addEventListener("keydown", function(event) {
             document.getElementById("Goback").onclick=function(){
 window.location.href="index.html"
             }
-   </script>
-   <script>
-  function launchFullScreen() {
+         function launchFullScreen() {
     const elem = document.documentElement;
     if (elem.requestFullscreen) {
       elem.requestFullscreen();
@@ -127,7 +129,9 @@ window.location.href="index.html"
 
   window.addEventListener("click", launchFullScreen, { once: true });
   window.addEventListener("keydown", launchFullScreen, { once: true });
-</script>
+   </script>
+
 </body>
 </html>
+
 

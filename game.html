@@ -27,7 +27,7 @@
   color: white;
   font-family: sans-serif;
 }
-#check1{
+#check1,#Goback{
     color: black;
     background-color: hotpink;
     border-radius: 10px;
@@ -66,6 +66,7 @@ html, body {
     <p id="score" onclick="check()">Score:10</p>
     <button  id="Goback" onclick="back">Go Back</button>
 </div>
+
    <script>
 
     function launchFullScreen() {
@@ -110,16 +111,18 @@ window.addEventListener("keydown", launchFullScreen, { once: true });
     return;
 
         }
-        if(enteredNumber==randomNumber){
-            totalscore=totalscore+1
-            score.textContent="score:"+totalscore
-            console.log("Right")
-            result.textContent="Right"
-            result.style.color="Green"
-            result.style.fontFamily = "Comic Sans MS, cursive, sans-serif";
-            check1.style.backgroundColor="Green"
-            correctAudio.play();
-        }
+if (enteredNumber == randomNumber) {
+    result.textContent = "Right";
+    result.style.color = "Green";
+    result.style.fontFamily = "Comic Sans MS, cursive, sans-serif";
+    check1.style.backgroundColor = "Green";
+    correctAudio.play();
+
+    // Wait for audio to play, then reload
+    setTimeout(() => {
+        location.reload();
+    }, 1000); // 1 second delay
+}
         else{
              totalscore=totalscore-1
              score.textContent="score:"+totalscore
@@ -131,12 +134,15 @@ window.addEventListener("keydown", launchFullScreen, { once: true });
             }
             guessnumber.value="";
             guessnumber.focus();
-
         }
-            document.getElementById("Goback").onclick=function(){
-window.location.href="index.html"
-            }
+        var goback=document.getElementById("Goback");
+      function back(){
+        window.location.href="index.html"
+      }
+      if(goback){
+        goback.addEventListener("click",back);
+      }
+        
    </script>
 </body>
 </html>
-

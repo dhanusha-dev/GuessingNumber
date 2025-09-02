@@ -1,57 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Start Screen</title>
-  <style>
-    #front {
-      width: 400px;
-      height: 400px;
-      background: linear-gradient(to bottom, purple, pink, cyan, black);
-      border-radius: 20px;
-      padding: 20px;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: center;
-      color: white;
-      font-family: Georgia, 'Times New Roman', Times, serif;
-      font-size: 40px;
-    }
-    button {
-      font-size: 20px;
-      padding: 10px 20px;
-      border-radius: 10px;
-      background-color: hotpink;
-      border: none;
-      cursor: pointer;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
+<style>
+      #front{width: 400px;
+  height: 400px;
+  background: linear-gradient(to bottom, purple, pink, cyan, black);
+  border-radius: 20px;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  font-family:Georgia, 'Times New Roman', Times, serif;
+  font-size: 40px;
+}
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+}
+#front {
+    width: 100vw;
+    height: 100vh;
+}
+#button{
+    height: 100px;
+    width: 100px;
+    border-radius: 50px;
+    font-family:cursive;
+    background-color:mediumturquoise;
+    font-size: large;
+}
+
+</style>
 <body>
-  <div id="front">
-    <h1>Start the Game</h1>
-    <button onclick="startGame()">Go</button>
-  </div>
+    <body id="front">
+       <h1>Start the Game</h1>
+      <button id="button" onclick="start()">Start</button>
+        <script>
 
-  <script>
-    function startGame() {
-      const elem = document.documentElement;
-      if (elem.requestFullscreen) {
+    function launchFullScreen() {
+    const elem = document.documentElement;
+    if (elem.requestFullscreen) {
         elem.requestFullscreen();
-      } else if (elem.webkitRequestFullscreen) {
+    } else if (elem.webkitRequestFullscreen) { // Safari
         elem.webkitRequestFullscreen();
-      } else if (elem.msRequestFullscreen) {
+    } else if (elem.msRequestFullscreen) { // IE11
         elem.msRequestFullscreen();
-      }
-
-      // Delay navigation slightly to allow fullscreen to activate
-      setTimeout(() => {
-        window.location.href = "./game.html";
-      }, 500);
     }
-  </script>
+}
+
+// Trigger fullscreen on first user interaction
+window.addEventListener("click", launchFullScreen, { once: true });
+window.addEventListener("keydown", launchFullScreen, { once: true }); 
+var Button=document.getElementById("button")
+function start(){
+    window.location.href="game.html"
+}
+</script>
 </body>
 </html>

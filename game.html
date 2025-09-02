@@ -112,10 +112,22 @@ guessnumber.addEventListener("keydown", function(event) {
             document.getElementById("Goback").onclick=function(){
 window.location.href="index.html"
             }
-           
-
-    
    </script>
-   
+   <script>
+  function launchFullScreen() {
+    const elem = document.documentElement;
+    if (elem.requestFullscreen) {
+      elem.requestFullscreen();
+    } else if (elem.webkitRequestFullscreen) {
+      elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) {
+      elem.msRequestFullscreen();
+    }
+  }
+
+  window.addEventListener("click", launchFullScreen, { once: true });
+  window.addEventListener("keydown", launchFullScreen, { once: true });
+</script>
 </body>
 </html>
+

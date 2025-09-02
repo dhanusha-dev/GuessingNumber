@@ -1,173 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-   /* #head{
-    color: aqua;
-    border-radius: 10px;
-    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-size: ;
-   } */
-    #head {
-  font-size: 100px;
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-  border-radius: 10px;
-  text-align: center;
-
-  /* Gradient magic */
-  background: linear-gradient(to right, rgb(105, 81, 215), rgb(78, 12, 45), rgb(85, 35, 36), rgb(131, 202, 90));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: transparent;
-      -webkit-text-stroke:5px lightblue ;
-}
-    #guessnumber{
-        position: relative;
-        margin-top: 10px;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guess The Number</title>
+  <style>
+    * {
+      box-sizing: border-box;
     }
-    #main{
-  width: 400px;
-  height: 400px;
-  background: linear-gradient(to bottom, purple, pink, cyan, black);
-  padding: 20px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  color: white;
-  font-family: sans-serif;
-}
-#check1,#Goback{
-    color: black;
-    background-color: hotpink;
-    border-radius: 10px;
-    border: solid hotpink;
-}
-/* Hide number input spinners in Chrome, Safari, Edge */
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
 
-/* Hide number input spinners in Firefox */
-input[type=number] {
-  -moz-appearance: textfield;
-}
-html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    overflow: hidden;
-}
-#main {
-    width: 100vw;
-    height: 100vh;
-}
-    
-    </style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: sans-serif;
+      background: linear-gradient(to bottom, purple, pink, cyan, black);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #main {
+      width: 90%;
+      max-width: 500px;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.6);
+      border-radius: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: white;
+    }
+
+    #head {
+      font-size: clamp(2rem, 8vw, 5rem);
+      text-align: center;
+      background: linear-gradient(to right, rgb(105, 81, 215), rgb(78, 12, 45), rgb(85, 35, 36), rgb(131, 202, 90));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
+      -webkit-text-stroke: 2px lightblue;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    input[type="number"] {
+      width: 80%;
+      max-width: 300px;
+      height: 50px;
+      background-color: bisque;
+      border: solid pink;
+      border-radius: 10px;
+      font-size: 1rem;
+      text-align: center;
+      color: skyblue;
+      margin-bottom: 20px;
+    }
+
+    #check1, #Goback {
+      width: 60%;
+      max-width: 150px;
+      height: 40px;
+      font-size: 1rem;
+      margin: 10px;
+      color: black;
+      background-color: hotpink;
+      border-radius: 10px;
+      border: solid hotpink;
+      cursor: pointer;
+    }
+
+    #result, #score {
+      font-size: 1.2rem;
+      margin: 10px;
+      font-family: "Comic Sans MS", cursive, sans-serif;
+    }
+
+    /* Hide number input spinners */
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+  </style>
 </head>
 <body>
   <audio src="./gameAudio.mp3" loop autoplay></audio>
-<div id="main"> 
-    <h1 id="head">Guess The Number From 1 t0 10</h1>
-    <input type="number" id="guessnumber" placeholder="        Enter The Number" min="1" max="10" style="width: 170px;height:50px;  background-color: bisque; border: solid pink;border-radius: 10px;"><br><br>
-    <button onclick="check()" id="check1"style="width: 90px;height: 30px;">Check</button> 
-    <p id="result" onclick="check()"></p>
-    <p id="score" onclick="check()">Score:10</p>
-    <button  id="Goback" onclick="back">Go Back</button>
-</div>
 
-   <script>
-// Inside your <script> in game.html
-window.addEventListener("DOMContentLoaded", () => {
-  const shouldPlay = localStorage.getItem("playMusic");
-  if (shouldPlay === "true") {
-    const bgMusic = document.getElementById("bgMusic");
-    bgMusic.loop = true;
-    bgMusic.play();
-    localStorage.removeItem("playMusic"); // optional: clear flag after use
-  }
-});
+  <div id="main">
+    <h1 id="head">Guess The Number From 1 to 10</h1>
+    <input type="number" id="guessnumber" placeholder="Enter The Number" min="1" max="10" />
+    <button onclick="check()" id="check1">Check</button>
+    <p id="result"></p>
+    <p id="score">Score: 10</p>
+    <button id="Goback">Go Back</button>
+  </div>
+
+  <script>
+    window.addEventListener("DOMContentLoaded", () => {
+      const shouldPlay = localStorage.getItem("playMusic");
+      if (shouldPlay === "true") {
+        const bgMusic = document.getElementById("bgMusic");
+        bgMusic.loop = true;
+        bgMusic.play();
+        localStorage.removeItem("playMusic");
+      }
+    });
+
     function launchFullScreen() {
-    const elem = document.documentElement;
-    if (elem.requestFullscreen) {
+      const elem = document.documentElement;
+      if (elem.requestFullscreen) {
         elem.requestFullscreen();
-    } else if (elem.webkitRequestFullscreen) { // Safari
+      } else if (elem.webkitRequestFullscreen) {
         elem.webkitRequestFullscreen();
-    } else if (elem.msRequestFullscreen) { // IE11
+      } else if (elem.msRequestFullscreen) {
         elem.msRequestFullscreen();
-    }
-}
-
-// Trigger fullscreen on first user interaction
-window.addEventListener("click", launchFullScreen, { once: true });
-window.addEventListener("keydown", launchFullScreen, { once: true });
-    //selecting input box,paraGraph
-    var guessnumber=document.getElementById("guessnumber")
-    var Result=document.getElementById("result")
-    var score=document.getElementById("score")
-    var randomNumber=Math.floor(Math.random()*10)+1
-    console.log(randomNumber)
-    var totalscore=10
-    const correctAudio=new Audio("CorrectAudioo.mp3")
-    const wrongAudio= new Audio("wrongAudio.mp3")
-    guessnumber.style.color="skyblue";
-                // Trigger check() when Enter is pressed
-                  guessnumber.addEventListener("keydown", function (event) {
-    if (event.key === "Enter") {
-      check();
-    }
-  });
-
-    function check(){
-        var enteredNumber=guessnumber.value 
-        if(enteredNumber==""){
-            result.textContent="Please enter the number"
-            result.style.color="yellow"
-             result.style.fontFamily = "Comic Sans MS, cursive, sans-serif";
-    check1.style.backgroundColor = "orange";
-    guessnumber.focus();
-    return;
-
-        }
-if (enteredNumber == randomNumber) {
-    result.textContent = "Right";
-    result.style.color = "Green";
-    result.style.fontFamily = "Comic Sans MS, cursive, sans-serif";
-    check1.style.backgroundColor = "Green";
-    correctAudio.play();
-
-    // Wait for audio to play, then reload
-    setTimeout(() => {
-        location.reload();
-    }, 1000); // 1 second delay
-}
-        else{
-             totalscore=totalscore-1
-             score.textContent="score:"+totalscore
-             result.textContent="Wrong"
-             check1.style.backgroundColor="red"
-             result.style.color="red"
-             result.style.fontFamily = "Comic Sans MS, cursive, sans-serif";
-             wrongAudio.play();
-            }
-            guessnumber.value="";
-            guessnumber.focus();
-        }
-        var goback=document.getElementById("Goback");
-      function back(){
-        window.location.href="index.html"
       }
-      if(goback){
-        goback.addEventListener("click",back);
+    }
+
+    window.addEventListener("click", launchFullScreen, { once: true });
+    window.addEventListener("keydown", launchFullScreen, { once: true });
+
+    const guessnumber = document.getElementById("guessnumber");
+    const result = document.getElementById("result");
+    const score = document.getElementById("score");
+    const check1 = document.getElementById("check1");
+    const randomNumber = Math.floor(Math.random() * 10) + 1;
+    let totalscore = 10;
+
+    const correctAudio = new Audio("CorrectAudioo.mp3");
+    const wrongAudio = new Audio("wrongAudio.mp3");
+
+    guessnumber.addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        check();
       }
-        
-   </script>
+    });
+
+    function check() {
+      const enteredNumber = guessnumber.value;
+      if (enteredNumber === "") {
+        result.textContent = "Please enter the number";
+        result.style.color = "yellow";
+        check1.style.backgroundColor = "orange";
+        guessnumber.focus();
+        return;
+      }
+
+      if (enteredNumber == randomNumber) {
+        result.textContent = "Right";
+        result.style.color = "green";
+        check1.style.backgroundColor = "green";
+        correctAudio.play();
+        setTimeout(() => {
+          location.reload();
+        }, 1000);
+      } else {
+        totalscore--;
+        score.textContent = "Score: " + totalscore;
+        result.textContent = "Wrong";
+        result.style.color = "red";
+        check1.style.backgroundColor = "red";
+        wrongAudio.play();
+      }
+
+      guessnumber.value = "";
+      guessnumber.focus();
+    }
+
+    const goback = document.getElementById("Goback");
+    goback.addEventListener("click", () => {
+      window.location.href = "index.html";
+    });
+  </script>
 </body>
 </html>

@@ -4,75 +4,96 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-</head>
-<style>
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  overflow: hidden;
-}
+    <style>
+   /* #head{
+    color: aqua;
+    border-radius: 10px;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: ;
+   } */
+    #head {
+  font-size: 100px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  border-radius: 10px;
+  text-align: center;
 
-#front {
-  width: 100vw;
-  height: 100vh;
+  /* Gradient magic */
+  background: linear-gradient(to right, rgb(105, 81, 215), rgb(78, 12, 45), rgb(85, 35, 36), rgb(131, 202, 90));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+      -webkit-text-stroke:5px lightblue ;
+}
+    #guessnumber{
+        position: relative;
+        margin-top: 10px;
+    }
+    #main{
+  width: 400px;
+  height: 400px;
   background: linear-gradient(to bottom, purple, pink, cyan, black);
-  border-radius: 20px;
-  padding: 5vh;
+  padding: 20px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   color: white;
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  font-size: 2rem;
+  font-family: sans-serif;
+}
+#check1,#Goback{
+    color: black;
+    background-color: hotpink;
+    border-radius: 10px;
+    border: solid hotpink;
+}
+/* Hide number input spinners in Chrome, Safari, Edge */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
-#button {
-  height: 80px;
-  width: 80px;
-  border-radius: 50%;
-  font-family: cursive;
-  background-color: mediumturquoise;
-  font-size: 1rem;
-  border: none;
-  cursor: pointer;
+/* Hide number input spinners in Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }
-
-#first {
-  font-size: 3rem;
-  text-align: center;
-  font-family: cursive;
-  background: linear-gradient(to left, rgb(17, 169, 245), rgb(179, 127, 242), rgb(46, 226, 208), rgb(152, 92, 152));
-  -webkit-background-clip: text;
-  color: transparent;
-  -webkit-text-stroke: 1px blue;
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
 }
+#main {
+    width: 100vw;
+    height: 100vh;
+}
+    
+    </style>
+</head>
+<body>
+  <audio src="./gameAudio.mp3" loop autoplay></audio>
+<div id="main"> 
+    <h1 id="head">Guess The Number From 1 t0 10</h1>
+    <input type="number" id="guessnumber" placeholder="        Enter The Number" min="1" max="10" style="width: 170px;height:50px;  background-color: bisque; border: solid pink;border-radius: 10px;"><br><br>
+    <button onclick="check()" id="check1"style="width: 90px;height: 30px;">Check</button> 
+    <p id="result" onclick="check()"></p>
+    <p id="score" onclick="check()">Score:10</p>
+    <button  id="Goback" onclick="back">Go Back</button>
+</div>
 
-/* 📱 Mobile optimization */
-@media (max-width: 600px) {
-  #first {
-    font-size: 2rem;
-    -webkit-text-stroke: 0.5px blue;
+   <script>
+// Inside your <script> in game.html
+window.addEventListener("DOMContentLoaded", () => {
+  const shouldPlay = localStorage.getItem("playMusic");
+  if (shouldPlay === "true") {
+    const bgMusic = document.getElementById("bgMusic");
+    bgMusic.loop = true;
+    bgMusic.play();
+    localStorage.removeItem("playMusic"); // optional: clear flag after use
   }
-
-  #button {
-    width: 60px;
-    height: 60px;
-    font-size: 0.8rem;
-  }
-
-  #front {
-    padding: 3vh;
-  }
-}
-</style>
-<body id="front">
-       <h1 id="first">Start the Game</h1>
-      <button id="button" onclick="start()">Start</button>
-        <script>
-
+});
     function launchFullScreen() {
     const elem = document.documentElement;
     if (elem.requestFullscreen) {
@@ -86,13 +107,67 @@ html, body {
 
 // Trigger fullscreen on first user interaction
 window.addEventListener("click", launchFullScreen, { once: true });
-window.addEventListener("keydown", launchFullScreen, { once: true }); 
-var Button=document.getElementById("button")
-function start(){
-    window.location.href="game.html"
-      localStorage.setItem("playMusic", "true");
+window.addEventListener("keydown", launchFullScreen, { once: true });
+    //selecting input box,paraGraph
+    var guessnumber=document.getElementById("guessnumber")
+    var Result=document.getElementById("result")
+    var score=document.getElementById("score")
+    var randomNumber=Math.floor(Math.random()*10)+1
+    console.log(randomNumber)
+    var totalscore=10
+    const correctAudio=new Audio("CorrectAudioo.mp3")
+    const wrongAudio= new Audio("wrongAudio.mp3")
+    guessnumber.style.color="skyblue";
+                // Trigger check() when Enter is pressed
+                  guessnumber.addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+      check();
+    }
+  });
 
+    function check(){
+        var enteredNumber=guessnumber.value 
+        if(enteredNumber==""){
+            result.textContent="Please enter the number"
+            result.style.color="yellow"
+             result.style.fontFamily = "Comic Sans MS, cursive, sans-serif";
+    check1.style.backgroundColor = "orange";
+    guessnumber.focus();
+    return;
+
+        }
+if (enteredNumber == randomNumber) {
+    result.textContent = "Right";
+    result.style.color = "Green";
+    result.style.fontFamily = "Comic Sans MS, cursive, sans-serif";
+    check1.style.backgroundColor = "Green";
+    correctAudio.play();
+
+    // Wait for audio to play, then reload
+    setTimeout(() => {
+        location.reload();
+    }, 1000); // 1 second delay
 }
-</script>
+        else{
+             totalscore=totalscore-1
+             score.textContent="score:"+totalscore
+             result.textContent="Wrong"
+             check1.style.backgroundColor="red"
+             result.style.color="red"
+             result.style.fontFamily = "Comic Sans MS, cursive, sans-serif";
+             wrongAudio.play();
+            }
+            guessnumber.value="";
+            guessnumber.focus();
+        }
+        var goback=document.getElementById("Goback");
+      function back(){
+        window.location.href="index.html"
+      }
+      if(goback){
+        goback.addEventListener("click",back);
+      }
+        
+   </script>
 </body>
 </html>

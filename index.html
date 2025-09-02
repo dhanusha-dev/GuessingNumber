@@ -1,29 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Start Screen</title>
+  <style>
+    #front {
+      width: 400px;
+      height: 400px;
+      background: linear-gradient(to bottom, purple, pink, cyan, black);
+      border-radius: 20px;
+      padding: 20px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      font-size: 40px;
+    }
+    button {
+      font-size: 20px;
+      padding: 10px 20px;
+      border-radius: 10px;
+      background-color: hotpink;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
 </head>
-<style>
-      #front{width: 400px;
-  height: 400px;
-  background: linear-gradient(to bottom, purple, pink, cyan, black);
-  border-radius: 20px;
-  padding: 20px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  color: white;
-  font-family:Georgia, 'Times New Roman', Times, serif;
-  font-size: 40px;
-}
-
-</style>
 <body>
-    <div id="front">
-       <h1>Start the Game</h1>
-      <a href="./game.html"> <button>Go</button></a>
+  <div id="front">
+    <h1>Start the Game</h1>
+    <button onclick="startGame()">Go</button>
+  </div>
+
+  <script>
+    function startGame() {
+      const elem = document.documentElement;
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.webkitRequestFullscreen) {
+        elem.webkitRequestFullscreen();
+      } else if (elem.msRequestFullscreen) {
+        elem.msRequestFullscreen();
+      }
+
+      // Delay navigation slightly to allow fullscreen to activate
+      setTimeout(() => {
+        window.location.href = "./game.html";
+      }, 500);
+    }
+  </script>
+</body>
 </html>

@@ -17,7 +17,10 @@
     #main{
   width: 400px;
   height: 400px;
+  background: linear-gradient(to bottom, purple, pink, cyan, black);
+  border-radius: 20px;
   padding: 20px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -42,12 +45,15 @@ input[type=number]::-webkit-outer-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
-        html, body {
-  margin: 0;
-  padding: 0;
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden;
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+}
+#main {
+    width: 100vw;
+    height: 100vh;
 }
     
     </style>
@@ -55,13 +61,28 @@ input[type=number] {
 <body>
 <div id="main"> 
     <h1 id="head">Guess The Number From 1 t0 10</h1>
-    <input type="number" id="guessnumber" placeholder="        Enter The Number" min="1" max="1" style="width: 170px;height:50px;  background-color: bisque; border: solid pink;border-radius: 10px;"><br><br>
-    <button onclick="check()" id="check1" onclick="event()" style="width: 90px;height: 30px;">Check</button> 
+    <input type="number" id="guessnumber" placeholder="        Enter The Number" min="1" max="10" style="width: 170px;height:50px;  background-color: bisque; border: solid pink;border-radius: 10px;"><br><br>
+    <button onclick="check()" id="check1"style="width: 90px;height: 30px;">Check</button> 
     <p id="result" onclick="check()"></p>
     <p id="score" onclick="check()">Score:10</p>
     <button  id="Goback" onclick="back">Go Back</button>
 </div>
    <script>
+
+    function launchFullScreen() {
+    const elem = document.documentElement;
+    if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+    } else if (elem.webkitRequestFullscreen) { // Safari
+        elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) { // IE11
+        elem.msRequestFullscreen();
+    }
+}
+
+// Trigger fullscreen on first user interaction
+window.addEventListener("click", launchFullScreen, { once: true });
+window.addEventListener("keydown", launchFullScreen, { once: true });
     //selecting input box,paraGraph
     var guessnumber=document.getElementById("guessnumber")
     var Result=document.getElementById("result")
@@ -73,12 +94,12 @@ input[type=number] {
     const wrongAudio= new Audio("wrongAudio.mp3")
     guessnumber.style.color="skyblue";
                 // Trigger check() when Enter is pressed
-guessnumber.addEventListener("keydown", function(event) {
-  if (event.key === "Enter") {
-    check();
-  }
-});
-    
+                  guessnumber.addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+      check();
+    }
+  });
+
     function check(){
         var enteredNumber=guessnumber.value 
         if(enteredNumber==""){
@@ -116,22 +137,6 @@ guessnumber.addEventListener("keydown", function(event) {
             document.getElementById("Goback").onclick=function(){
 window.location.href="index.html"
             }
-         function launchFullScreen() {
-    const elem = document.documentElement;
-    if (elem.requestFullscreen) {
-      elem.requestFullscreen();
-    } else if (elem.webkitRequestFullscreen) {
-      elem.webkitRequestFullscreen();
-    } else if (elem.msRequestFullscreen) {
-      elem.msRequestFullscreen();
-    }
-  }
-
-  window.addEventListener("click", launchFullScreen, { once: true });
-  window.addEventListener("keydown", launchFullScreen, { once: true });
    </script>
-
 </body>
 </html>
-
-

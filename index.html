@@ -38,11 +38,20 @@ html, body {
     background-color:mediumturquoise;
     font-size: large;
 }
+#first{
+    font-size: 150px;
+    font-family: cursive;
+    background: linear-gradient(to left,rgb(17, 169, 245),rgb(179, 127, 242),rgb(46, 226, 208),rgb(152, 92, 152));
+    -webkit-background-clip: text;
+    -webkit-backdrop-filter: transparent;
+    color: transparent;
+    -webkit-text-stroke:2px blue ;
+    
+}
 
 </style>
-<body>
-    <body id="front">
-       <h1>Start the Game</h1>
+<body id="front">
+       <h1 id="first">Start the Game</h1>
       <button id="button" onclick="start()">Start</button>
         <script>
 
@@ -63,6 +72,8 @@ window.addEventListener("keydown", launchFullScreen, { once: true });
 var Button=document.getElementById("button")
 function start(){
     window.location.href="game.html"
+      localStorage.setItem("playMusic", "true");
+  window.location.href = "game.html";
 }
 </script>
 </body>
